@@ -6,7 +6,7 @@
   
 1. There are no self links. 
 2. The graph is not weighted i.e. two inputs #A #B and #A #B has no effect on the graph (except updating the times)
-3. The graph system in mainted for tweets only in the time-windows. This is done just to save memory but can be easily modified.
+3. The graph system is maintained for tweets only in the time-window. This is done just to save memory but can be easily modified.
 4. Solution should be single-threaded.
   
   With these assumptions in mind the same graph is represented using 2 structures (1) Adjacency matrix (2) Time graph.
@@ -18,7 +18,7 @@
   #A#C = 1446141110 
   #B#C = 1446141110
   ```
-  At any given point the degree of the graph is 2 times the no of entries in out adj matrix structure and the avg degree is (2 * 3)/3 = 6. 
+  At any given point the degree of the graph is 2 times the no of entries in adj matrix structure and the avg degree is (2 * 3)/3 = 6. 
   So now if a new entry "#A #C #D" comes on time "Thu Oct 29 17:51:51 +0000 2015". As per assumption (1) and (2) the adj matrix has the following entries:
   ```
   #A#B = 1446141110
@@ -40,11 +40,11 @@
   ```
   making the degree same for both representations.
   
-##Need for 2 Strucutres:
-  We need 2 strucutres because of assumption (3). We need to maintain vertices that fall into the time frame window and purge rest of them from the graph. This is done by recording last tweet arrival time. To find this we use our time graph and sync adj matrix. Also as per assumption (2) new vettex combination if already exists should get an update in time, this is done using adj matrix and then moving the entry from one time to another in time graph.
+##Need for 2 Structures:
+  We need 2 structures because of assumption (3). We need to maintain vertices that fall into the time frame window and purge rest of them from the graph. This is done by recording last tweet arrival time. To find this we use our time graph and sync adj matrix. Also as per assumption (2) new vertex combination if already exists should get an update in time, this is done using adj matrix and then moving the entry from one time to another in time graph. When a time entry falls out of time window, we delete the time from time graph and sync adj_matrix.
   
 ##Scalability:
-  The program is written to run on a single thread as per assumption (4), but can be easily extended to run on multi-threads or in a distributed system. The model supports a function called "combine" that can be used to combine multiple graph systems into one for a fraction of time take to create one. So multi threaded or a distributed system we can split the input feeds across multiple program and then combine them into one at the end, to get the unified avg degree.
+  The program is written to run on a single thread as per assumption (4), but can be easily extended to run on multi-threads or in a distributed system. The script supports a method called "combine" that can be used to combine multiple graph systems into one for a fraction of time take to create one. So multi threaded or a distributed system we can split the input feeds across multiple program and then combine them into one at the end, to get the unified avg degree.
   
   ![alt tag](https://raw.github.com/arvind-trinity/insight-tweet-challenge/master/images/average_degree.png)
   

@@ -89,6 +89,9 @@ class RollingHashtagGraph
       return
     end
 
+    puts "time #{timestamp} combination #{combination}"
+
+    # set there is a modification
     @is_change = true
 
     # sort each combination

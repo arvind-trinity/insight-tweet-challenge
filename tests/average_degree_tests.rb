@@ -80,7 +80,6 @@ class TestAverageDegree < Test::Unit::TestCase
 
     # add items such that the first item moves out of scope
     @rolling_graph.add("Thu Oct 29 17:52:40 +0000 2015", "#e #f")
-    puts @rolling_graph.get_average_degree
     assert(@rolling_graph.get_average_degree == 1.67, "Wrong avg degree")
   end
 end

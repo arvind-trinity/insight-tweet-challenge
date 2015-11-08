@@ -13,25 +13,31 @@
 
 ##Adjacency Matrix:
   As per assumption (1) adj matrix is represented as an array of vertices pair vs time in epoch (instead of weight coz the graph not weighted). So for an input tweet that has 3 hash tags "#A #B #C" on time "Thu Oct 29 17:51:50 +0000 2015" then there will be 3 entries in the data-structure 
-  '''
-        #A#B = 1446141110 
-        #A#C = 1446141110 
-        #B#C = 1446141110
-  '''
+  ```
+  #A#B = 1446141110 
+  #A#C = 1446141110 
+  #B#C = 1446141110
+  ```
   At any given point the degree of the graph is 2 times the no of entries in out adj matrix structure and the avg degree is (2 * 3)/3 = 6. 
   So now if a new entry "#A #C #D" comes on time "Thu Oct 29 17:51:51 +0000 2015". As per assumption (1) and (2) the adj matrix has the following entries:
-        #A#B = 1446141110
-        #A#C = 1446141111 (updated time, no duplicates)
-        #B#C = 1446141110
-        #C#D = 1446141111
+  ```
+  #A#B = 1446141110
+  #A#C = 1446141111 (updated time, no duplicates)
+  #B#C = 1446141110
+  #C#D = 1446141111
+  ```
   Now the degree is 4 * 2 = 8 and avg is 8 / 4 = 2.
   
 ##Time Graph:
   Theoritically time graph is one graph per time bucket (bucket = min time unit of measure of input, 1 second in this case). So for entry "#A #B #C" on time "Thu Oct 29 17:51:50 +0000 2015" the time graph is:
-        1446141110 = [#A#B, #A#C, #B#C]
+  ```
+  1446141110 = [#A#B, #A#C, #B#C]
+  ```
   And for the new input "#A #C #D" on time "Thu Oct 29 17:51:51 +0000 2015":
-        1446141110 = [#A#B, #B#C]
-        1446141111 = [#A#C, #C#D]
+  ```
+  1446141110 = [#A#B, #B#C]
+  1446141111 = [#A#C, #C#D]
+  ```
   making the degree same for both representations.
   
 ##Need for 2 Strucutres:

@@ -89,8 +89,6 @@ class RollingHashtagGraph
       return
     end
 
-    puts "time #{timestamp} combination #{combination}"
-
     # set there is a modification
     @is_change = true
 
@@ -132,7 +130,6 @@ class RollingHashtagGraph
 
   # returns average degree
   def get_average_degree
-
     if !is_change
       return @last_avg
     end
@@ -178,8 +175,22 @@ class RollingHashtagGraph
     end
 
     # concat adj matrices and time graphs
-    @adj_matrix.concat(adj_matrix)
-    time_graph.each { |k, v| @time_graph[k].concat(v) }
+    @adj_matrix.merge!(adj_matrix)
+    time_graph.each do |k, v| 
+      entry = @time_graph.fetch(k, []) 
+      @time_graph[k] = entry.concat(v)
+    end
+
+    #update last entry time
+    @last_entry_time = @time_graph.keys.max
+
+    # purge old entries
+    purge
+
+    # update avr store
+    @is_change = true
+    @last_avg = get_average_degree
+    @is_change = false
   end
 
 end

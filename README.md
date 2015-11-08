@@ -46,6 +46,8 @@
 ##Scalability:
   The program is written to run on a single thread as per assumption (4), but can be easily extended to run on multi-threads or in a distributed system. The model supports a function called "combine" that can be used to combine multiple graph systems into one for a fraction of time take to create one. So multi threaded or a distributed system we can split the input feeds across multiple program and then combine them into one at the end, to get the unified avg degree.
   
+  ![alt tag](https://raw.github.com/arvind-trinity/insight-tweet-challenge/master/images/average_degree.png)
+  
 ##Execution:
   To execute the program run "run.sh" from the higher level directory this reads the tweets.txt file from tweets_input directory and produces 2 output files in tweets_output directory. 
   "tests" directory has both unit tests and scalability tests. tests.sh executes all of them and displays the result on screen.

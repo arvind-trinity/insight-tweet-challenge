@@ -52,3 +52,11 @@
   To execute the program run "run.sh" from the higher level directory this reads the tweets.txt file from tweets_input directory and produces 2 output files in tweets_output directory. 
   "tests" directory has both unit tests and scalability tests. tests.sh executes all of them and displays the result on screen.
   
+##Requirements:
+  The program does not use any fancy ruby gems, following are the requirements:
+  1. Ruby 2.0 or higher
+  2. json gem
+  3. time gem
+  4. test-unit gem (to run unit tests)
+
+  
